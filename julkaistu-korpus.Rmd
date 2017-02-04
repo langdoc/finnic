@@ -1,0 +1,90 @@
+---
+title: "Untitled"
+author: "Niko Partanen"
+date: "4 February 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r}
+library(tidyverse)
+library(stringr)
+library(rgdal)
+library(leaflet)
+```
+
+```{r}
+
+read_csv("published_corpus.csv") %>% 
+        tidyr::separate(Sivut, c("page_start", "page_end"), convert = T) %>%
+        mutate(page_end = ifelse(is.na(page_end), yes = page_start, no = page_end),
+               page_count = page_end - page_start,
+               page_count = ifelse(page_count == 0, yes = 1, no = page_count)) %>%
+        filter(! is.na(municipality)) -> corpus # %>% 
+#        mutate(display_name = municipality,
+#               municipality = str_replace_all(municipality, "[^a-zA-Z0-9]", "")) -> corpus
+
+# corpus %>% count(Murre) %>% arrange(desc(n))
+
+mun <- readOGR("Municipalities.kml","Municipalities")
+geo_info <- data_frame(municipality =  mun@data$Name,
+                       # str_replace_all(as.character(mun@data$Name), "[^a-zA-Z0-9]", ""),
+                                longitude = mun@coords[,1],
+                                latitude = mun@coords[,2])
+
+write_csv(geo_info, "geo_info.csv")
+geo_info <- read_csv("geo_info.csv", col_types = "cdd")
+
+# corpus %>% select(municipality) %>% filter(! municipality %in% geo_info$municipality)
+
+
+# left_join(corpus %>% filter(municipality == "Haljärvi") %>%
+#                   mutate(municipality = gsub("ä", "a", municipality)), 
+#           geo_info %>% 
+#                   filter(municipality == "Haljärvi") %>%
+#                   mutate(municipality = gsub("ä", "a", municipality))) %>% 
+#                   select(municipality, latitude, longitude)
+
+corpus <- left_join(corpus, geo_info)
+
+corpus %>% count(municipality, latitude, longitude)
+
+# corpus %>% group_by(municipality, Murre, latitude, longitude) %>%
+#                 summarise(pages = sum(page_count)) %>%
+#                 ungroup %>% View
+
+pal <- colorFactor(c("yellow", "red", "blue", "green", "green", "red"), domain = corpus %>% 
+                           distinct(Murre) %>% 
+                           arrange(Murre) %>% .$Murre)
+
+corpus %>% distinct(page_count) %>% arrange(desc(page_count))
+
+corpus %>% 
+        mutate(page_category = ifelse(page_count > 300, 12, 
+                                   ifelse(page_count > 100, 10, 
+                                       ifelse(page_count < 100, 6, NA)))) -> corpus
+
+# corpus %>% filter(municipality == "Tver") %>% View
+
+corpus %>% # group_by(municipality, latitude, longitude) %>% 
+        mutate(popup = paste0("<h2>", municipality, "</h2>",
+                              "<p>Tästä pitäjästä on julkaistu litteroituja tekstejä yhteensä ", page_count, " sivua. </p> <p> Periaatteessa tähän voisi laittaa muutakin oleellista tietoa, esimerkiksi lista julkaisuista tai jopa linkit eri skannattuihin / digitoituihin teksteihin. </p>")) -> corpus # %>% ungroup -> corpus
+
+leaflet_map <- leaflet(data = corpus %>% 
+                filter(! is.na(latitude))) %>%
+        addProviderTiles("CartoDB.Positron") %>%
+        addCircleMarkers(radius = ~page_category, 
+                         popup = ~popup, 
+                         stroke = F, 
+                         fillOpacity = 1, 
+                         color = ~pal(Murre))
+
+library(htmlwidgets)
+saveWidget(leaflet_map, file="docs/karjalan_julkaistu_korpus.html")
+
+```
