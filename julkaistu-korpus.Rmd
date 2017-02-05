@@ -92,7 +92,7 @@ library(htmlwidgets)
 
 ```
 
-Tämä kartta perustuu Markus Juutisen laatimaan luetteloon karjalan, lyydin ja vepsän julkaistuista  transkriboiduista murrenäytteistä. Tällä hetkellä luettelossa ovat mukana vain karjala ja lyydi, eikä se ole näidenkään osalta täysin lopullinen. Oleellinen tavoite on kartoittaa sellaiset litteroidut materiaalit, joihin periaatteessa on olemassa tekstejä vastaavat nauhoitukset.
+Tämä kartta perustuu Markus Juutisen laatimaan luetteloon karjalan, lyydin ja vepsän julkaistuista  murrenäytteistä. Tällä hetkellä luettelossa ovat mukana vain karjala ja lyydi, eikä se ole näidenkään osalta täysin lopullinen. Oleellinen tavoite on kartoittaa sellaiset litteroidut materiaalit, joihin periaatteessa on olemassa tekstejä vastaavat nauhoitukset.
 
 Pitäjien sijainti on tällä hetkellä tallennettu [Google Maps-sivustoon](https://drive.google.com/open?id=1IF58xysxfkTPMBj1S0CVqnAOkYM&usp=sharing). Käytännössä tarkempi jako on tarpeen, sillä julkaisuissa on yleensä tieto esimerkiksi syntymäpaikoista kylittäin. Suuri osa näistä kylistä on nyt kadonnut ja puuttuu moderneilta kartoilta, minkä lisäksi nimien kirjoitusasussa on suurta horjuvuutta (karjalainen, venäläinen ja suomalainen variantti yms.). Tämän takia emme ole vielä lisänneet kaikkia kyliä.
 
