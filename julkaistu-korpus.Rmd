@@ -1,12 +1,12 @@
 ---
-title: "Untitled"
-author: "Niko Partanen"
+title: "Karjalan, lyydin ja vepsän julkaistut kielennäytteet"
+author: "Niko Partanen ja Markus Juutinen"
 date: "4 February 2017"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = FALSE)
 ```
 
 ## 
@@ -16,6 +16,8 @@ library(tidyverse)
 library(stringr)
 library(rgdal)
 library(leaflet)
+library(httr)
+library(DT)
 ```
 
 ```{r}
@@ -31,14 +33,19 @@ read_csv("published_corpus.csv") %>%
 
 # corpus %>% count(Murre) %>% arrange(desc(n))
 
-mun <- readOGR("Municipalities.kml","Municipalities")
+map_data <- httr::GET("https://mapsengine.google.com/map/kml?mid=1IF58xysxfkTPMBj1S0CVqnAOkYM")
+write_file(x = content(map_data), path = "temp/municipalities.kmz")
+unzip(zipfile = "temp/municipalities.kmz", exdir = "temp")
+
+mun <- readOGR("temp/doc.kml", "Municipalities", verbose = F)
+
 geo_info <- data_frame(municipality =  mun@data$Name,
                        # str_replace_all(as.character(mun@data$Name), "[^a-zA-Z0-9]", ""),
                                 longitude = mun@coords[,1],
                                 latitude = mun@coords[,2])
 
-write_csv(geo_info, "geo_info.csv")
-geo_info <- read_csv("geo_info.csv", col_types = "cdd")
+write_csv(geo_info, "temp/geo_info.csv")
+geo_info <- read_csv("temp/geo_info.csv", col_types = "cdd")
 
 # corpus %>% select(municipality) %>% filter(! municipality %in% geo_info$municipality)
 
@@ -52,17 +59,11 @@ geo_info <- read_csv("geo_info.csv", col_types = "cdd")
 
 corpus <- left_join(corpus, geo_info)
 
-corpus %>% count(municipality, latitude, longitude)
-
-# corpus %>% group_by(municipality, Murre, latitude, longitude) %>%
-#                 summarise(pages = sum(page_count)) %>%
-#                 ungroup %>% View
+# corpus %>% count(municipality, latitude, longitude)
 
 pal <- colorFactor(c("yellow", "red", "blue", "green", "green", "red"), domain = corpus %>% 
                            distinct(Murre) %>% 
                            arrange(Murre) %>% .$Murre)
-
-corpus %>% distinct(page_count) %>% arrange(desc(page_count))
 
 corpus %>% 
         mutate(page_category = ifelse(page_count > 300, 12, 
@@ -85,6 +86,49 @@ leaflet_map <- leaflet(data = corpus %>%
                          color = ~pal(Murre))
 
 library(htmlwidgets)
-saveWidget(leaflet_map, file="docs/karjalan_julkaistu_korpus.html")
+
+# path <- file.path(getwd(), "docs", "julkaistu_korpus.html")
+# saveWidget(leaflet_map, file = path)
 
 ```
+
+Tämä kartta perustuu Markus Juutisen laatimaan luetteloon karjalan, lyydin ja vepsän julkaistuista  transkriboiduista murrenäytteistä. Tällä hetkellä luettelossa ovat mukana vain karjala ja lyydi, eikä se ole näidenkään osalta täysin lopullinen. Oleellinen tavoite on kartoittaa sellaiset litteroidut materiaalit, joihin periaatteessa on olemassa tekstejä vastaavat nauhoitukset.
+
+Pitäjien sijainti on tällä hetkellä tallennettu [Google Maps-sivustoon](https://drive.google.com/open?id=1IF58xysxfkTPMBj1S0CVqnAOkYM&usp=sharing). Käytännössä tarkempi jako on tarpeen, sillä julkaisuissa on yleensä tieto esimerkiksi syntymäpaikoista kylittäin. Suuri osa näistä kylistä on nyt kadonnut ja puuttuu moderneilta kartoilta, minkä lisäksi nimien kirjoitusasussa on suurta horjuvuutta (karjalainen, venäläinen ja suomalainen variantti yms.). Tämän takia emme ole vielä lisänneet kaikkia kyliä.
+
+```{r}
+datatable(corpus %>% distinct(Teos, Kirjoittaja, Julkaisuvuosi, Julkaisija) %>% arrange(Teos))
+```
+
+
+Tässä kartassa olemme listanneet tverinkarjalan ja eteläkarjalan erilleen maantieteellisin syin, vaikka perinteisesti tverinkarjala lasketaan eteläkarjalaisiin murteisiin.
+
+```{r fig.height=8, fig.width=8, fig.align='center'}
+
+leaflet_map
+
+```
+
+</br>
+
+Alla oleva kaavio kuvaa eri julkaisuissa ollutta sivumäärää kielittäin. Kuten näemme, lyydin osuus on todella suuri verrattuna muihin.
+
+```{r}
+
+library(highcharter)
+
+highchart_data <- corpus %>% group_by(Murre) %>% summarise(pages = sum(page_count)) %>% ungroup
+
+highchart() %>% 
+  hc_chart(type = "column") %>% 
+  hc_title(text = "Julkaistut litteroidut sivut kielittäin") %>% 
+  hc_xAxis(categories = highchart_data$Murre) %>% 
+  hc_add_series(data = highchart_data$pages,
+                name = "Sivumäärä")
+
+```
+
+```{r}
+# corpus %>% count(Teos)
+```
+
