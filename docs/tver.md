@@ -19,12 +19,12 @@ Näitä vaiheita ei tehdä varsinaisesti toinen toisiaan seuraten, vaan osin pä
 4. Nauhoitteiden segmentointi
 5. Nauhoitteiden ja tekstien alignointi
 6. Metadatan luominen
-     - Kentät:
-         - Nauhoitusaika
-	 - Nauhoituspaikka
-	 - Nauhoittaja
-	 - Puhuja(t)
-	 - Puhujan asuinpaikka
-	 - Puhujan syntymäpaikka
-	 - Puhujan syntymäaika
-	 - Puhujan sukupuoli
+    - Kentät:
+        - Nauhoitusaika
+	- Nauhoituspaikka
+	- Nauhoittaja
+	- Puhuja(t)
+	- Puhujan asuinpaikka
+	- Puhujan syntymäpaikka
+	- Puhujan syntymäaika
+	- Puhujan sukupuoli
