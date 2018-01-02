@@ -2,6 +2,17 @@
 
 - Aika: Kesä 2018
 - Paikka: Tver
+- Järjestäjät: Niko Partanen, Janne Saarikivi jne. 
+
+### Tavoitteet 
+
+- Karjalan tverin murteen aineiston kerääminen 
+- Vanhan jo olemassa olevan aineiston saaminen digitaaliseen tutkimuskäyttöön 
+- Diakronisen aineiston luominen
+- Kielisosiologisen materiaalin tuottaminen
+    - Kielenvaihdon tutkimus 
+    - Kielikontaktin tutkimus 
+- Paikanninistön tutkimus 
 
 ### Työvaiheet
 
@@ -19,12 +30,11 @@ Näitä vaiheita ei tehdä varsinaisesti toinen toisiaan seuraten, vaan osin pä
 4. Nauhoitteiden segmentointi
 5. Nauhoitteiden ja tekstien alignointi
 6. Metadatan luominen
-    - Kentät:
-        - Nauhoitusaika
-	- Nauhoituspaikka
-	- Nauhoittaja
-	- Puhuja(t)
-	- Puhujan asuinpaikka
-	- Puhujan syntymäpaikka
-	- Puhujan syntymäaika
-	- Puhujan sukupuoli
+    - Nauhoitusaika
+    - Nauhoituspaikka
+    - Nauhoittaja
+    - Puhuja(t)
+    - Puhujan asuinpaikka	
+    - Puhujan syntymäpaikka
+    - Puhujan syntymäaika
+    - Puhujan sukupuoli
