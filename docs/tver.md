@@ -14,7 +14,19 @@
     - Kielikontaktin tutkimus 
 - Paikanninistön tutkimus 
 
-### Työvaiheet
+### Työvaiheet -- minimimalli
+
+Listaan alla sellaiset työvaiheet, jotka on mielestäni pakko tehdä ennen kenttätyömatkalle lähtöä. Mutta joka tapauksessa ne kuuluvat alla olevan laajemman esityksen yhteyteen, eikä niitä oikein pidä ajatella sen ulkopuolella.
+
+- Julkaisujen paikantaminen (Markus on tehnyt)
+- Nauhoitusten paikantaminen (Nikolla on lista)
+- Metadatan kerääminen näistä kahdesta
+    - Niko on tehnyt puoliksi, jonkun pitää tarkistaa ja täydentää (noin viikon työ)
+- Kaikkien julkaistujen tekstien sivujen skannaus, jotta ne ovat kentällä mukana
+    - Monta sivua on yhteensä? Siitä voi arvioida paljonko aikaa skannaus vie.
+
+
+### Työvaiheet -- laajempi esitys
 
 Näitä vaiheita ei tehdä varsinaisesti toinen toisiaan seuraten, vaan osin päällekkäin. Esimerkiksi metadatan luonti tehdään jo hyvin varhain, ja eri vaiheita priorisoidaan sen mukaan, miten asiat kehittyvät. Tämä ei siis ole millään tavalla triviaali tehtävä, mutta toisaalta työvaiheet ovat melko samat kielen kuin kielen kanssa, ja jotain tällaista on jo tehty komin kanssa monta kertaa.
 
