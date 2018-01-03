@@ -11,7 +11,7 @@
 - Diakronisen aineiston luominen
 - Kielisosiologisen materiaalin tuottaminen
     - Kielenvaihdon tutkimus 
-    - Kielikontaktin tutkimus 
+    - Kielikontaktin ja paikallisen etnisen vuorovaikutuksen tutkimus 
 - Paikanninistön tutkimus 
 
 ### Työvaiheet -- minimimalli
@@ -30,6 +30,8 @@ Listaan alla sellaiset työvaiheet, jotka on mielestäni pakko tehdä ennen kent
 
 Näitä vaiheita ei tehdä varsinaisesti toinen toisiaan seuraten, vaan osin päällekkäin. Esimerkiksi metadatan luonti tehdään jo hyvin varhain, ja eri vaiheita priorisoidaan sen mukaan, miten asiat kehittyvät. Tämä ei siis ole millään tavalla triviaali tehtävä, mutta toisaalta työvaiheet ovat melko samat kielen kuin kielen kanssa, ja jotain tällaista on jo tehty komin kanssa monta kertaa.
 
+Suluilla on merkitty sellaiset työvaiheet, jotka menevät sen verran monimutkaisiksi, että niiden järjestely vaatisi oikeastaan omaa projektiaan/rahoitustaan. Tuo jää varmasti tämän ulkopuolelle, mutta käytännössä pidemmin aikavälin tavoitteena on oltava, että jossain vaiheessa nauhat ja litteroinnit tulisivat yhteen.
+
 1. Nauhoitusten paikallistaminen (Kotuksen lista)
      - Selvitys siitä, mitkä on digitoitu
      - Arviointi siitä, mitä kaikkea digitoidaan
@@ -39,8 +41,8 @@ Näitä vaiheita ei tehdä varsinaisesti toinen toisiaan seuraten, vaan osin pä
      - Kielennäytteiden tekstintunnistus
      - Tekstintunnistuksen korjaaminen, priorisointi jollain perusteella
 3. Toisiaan vastaavien nauhoitusten ja kielennäytteiden löytäminen
-4. Nauhoitteiden segmentointi
-5. Nauhoitteiden ja tekstien alignointi
+4. (Nauhoitteiden segmentointi)
+5. (Nauhoitteiden ja tekstien alignointi)
 6. Metadatan luominen
     - Nauhoitusaika
     - Nauhoituspaikka
